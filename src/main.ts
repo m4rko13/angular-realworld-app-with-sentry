@@ -5,9 +5,10 @@ import { AppModule } from "./app/app.module";
 import { init } from "@sentry/angular-ivy";
 import * as Sentry from "@sentry/angular-ivy";
 import { Integrations } from "@sentry/tracing";
+import { environment } from './environments/environment';
 
 Sentry.init({
-  dsn: "https://3a4775edf24b488f9685f100f9605d1c@glitch.pbe0.seeland.one/1",
+  dsn: environment.glitchTipDsn,
   autoSessionTracking: false,
   integrations: [
     // Registers and configures the Tracing integration,
@@ -19,9 +20,6 @@ Sentry.init({
     Sentry.replayIntegration(),
   ],
   tracesSampleRate: 1.0,
-
-  // Set `tracePropagationTargets` to control for which URLs distributed tracing should be enabled
-  tracePropagationTargets: ["localhost", /^https:\/\/yourserver\.io\/api/],
 
   // Capture Replay for 10% of all sessions,
   // plus for 100% of sessions with an error
